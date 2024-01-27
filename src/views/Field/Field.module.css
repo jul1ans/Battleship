@@ -18,3 +18,25 @@
     background: gray;
   }
 }
+
+.hit {
+  position: relative;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 90%;
+    height: 90%;
+    background: red;
+    border-radius: 50%;
+  }
+}
+
+.show {
+  background: black;
+  pointer-events: none;
+}

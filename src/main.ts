@@ -1,8 +1,9 @@
-import './style.css'
-import { Field } from './views/Field/Field';
+import { Game } from './controller/Game';
 
-const field = new Field('#field', (x, y) => {
-  console.log(`clicked ${x}/${y}`);
+new Game({
+  sizeX: 10,
+  sizeY: 10,
+  field: {
+    selector: '#field'
+  }
 });
-
-field.render();

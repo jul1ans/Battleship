@@ -1,3 +1,5 @@
+import { Coordinate } from '../../types/Coordinate';
+import { checkCoordinateMatch } from '../../utils/checkCoordinateMatch';
 import styles from './Field.module.css';
 
 export class Field {
@@ -12,8 +14,10 @@ export class Field {
     this.target = document.querySelector<HTMLDivElement>(this.targetSelector);
   }
 
-  public render() {
+  public render(hitCoordinates: Coordinate[], showShips = false) {
     if (!this.target) {
+      alert('Field not found!');
+      console.error(`Field not found with seletor ${this.targetSelector}`);
       return;
     }
 
@@ -25,7 +29,14 @@ export class Field {
 
     for (let x = 0; x < this.sizeX; x++) {
       for (let y = 0; y < this.sizeY; y++) {
-        wrapper.appendChild(this.createCell(x, y));
+        wrapper.appendChild(
+          this.createCell(
+            x,
+            y,
+            checkCoordinateMatch(hitCoordinates, {x, y}),
+            showShips,
+          )
+        );
       }
     }
   }
@@ -37,9 +48,12 @@ export class Field {
     return wrapper;
   }
 
-  private createCell(x: number, y: number): HTMLElement {
+  private createCell(x: number, y: number, hit: boolean, show: boolean): HTMLElement {
     const cell = document.createElement('button');
     cell.classList.add(styles.cell);
+    cell.classList.toggle(styles.hit, hit);
+    cell.classList.toggle(styles.show, show);
+
     cell.addEventListener('click', () => {
       this.onCellClick(x, y);
     });
