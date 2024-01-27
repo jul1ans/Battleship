@@ -1,0 +1,20 @@
+.wrapper {
+  --border: solid 1px black;
+
+  display: grid;
+  grid-template-columns: repeat(var(--size-x), 1fr);
+  border-left: var(--border);
+  border-bottom: var(--border);
+}
+
+.cell {
+  width: 2rem;
+  height: 2rem;
+  border-right: var(--border);
+  border-top: var(--border);
+
+  &:hover,
+  &:focus-visible {
+    background: gray;
+  }
+}
