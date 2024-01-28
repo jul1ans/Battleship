@@ -16,7 +16,10 @@ export class Field {
         );
     }
 
-    public render(hitCoordinates: Coordinate[], showShips = false) {
+    public render(
+        hitCoordinates: Coordinate[],
+        visibleShipCoordinates: Coordinate[] = []
+    ) {
         if (!this.target) {
             alert('Field not found!');
             console.error(
@@ -38,7 +41,7 @@ export class Field {
                         x,
                         y,
                         checkCoordinateMatch(hitCoordinates, { x, y }),
-                        showShips
+                        checkCoordinateMatch(visibleShipCoordinates, { x, y })
                     )
                 );
             }

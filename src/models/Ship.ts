@@ -26,4 +26,8 @@ export class Ship {
         // Ship is healthy when at least one coordinate was not hitted
         return this.hits.length < this.coordinates.length;
     }
+
+    public getCoordinates(): Coordinate[] {
+        return this.coordinates;
+    }
 }

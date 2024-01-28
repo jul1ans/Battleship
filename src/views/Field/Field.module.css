@@ -37,6 +37,5 @@
 }
 
 .show {
-    background: black;
-    pointer-events: none;
+    background: blue;
 }

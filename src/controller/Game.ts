@@ -1,5 +1,6 @@
 import { Ship } from '../models/Ship';
 import { Coordinate } from '../types/Coordinate';
+import { getShips } from '../utils/getShips';
 import { Field } from '../views/Field/Field';
 import { GameConfig } from './types/GameConfig';
 
@@ -22,18 +23,16 @@ export class Game {
             sizeY
         );
 
-        this.ships.push(
-            new Ship([
-                { x: 0, y: 0 },
-                { x: 0, y: 1 },
-            ])
-        );
+        this.ships.push(...getShips(sizeX, sizeY, [4, 4, 5], 'test'));
 
         this.render();
     }
 
     private render() {
-        this.fieldView.render(this.hits);
+        this.fieldView.render(
+            this.hits,
+            this.ships.map((ship) => ship.getCoordinates()).flat()
+        );
     }
 
     private onSelectCell(x: number, y: number) {

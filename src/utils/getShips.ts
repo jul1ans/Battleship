@@ -59,8 +59,8 @@ function createShip(
     const horizontal = Math.round(randomGen() * 1) === 0;
 
     // Reduce the max values by the size to allow the extra space for the coordinates
-    const x = Math.floor(randomGen() * maxX - (horizontal ? size : 0));
-    const y = Math.floor(randomGen() * maxY - (horizontal ? 0 : size));
+    const x = Math.floor(randomGen() * (maxX - (horizontal ? size : 0)));
+    const y = Math.floor(randomGen() * (maxY - (horizontal ? 0 : size)));
 
     const coordinates: Coordinate[] = [{ x, y }];
 
@@ -72,6 +72,8 @@ function createShip(
             coordinates.push({ x, y: y + i });
         }
     }
+
+    console.log(coordinates);
 
     return new Ship(coordinates);
 }
