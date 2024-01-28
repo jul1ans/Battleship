@@ -1,9 +1,9 @@
-import { Coordinate } from '../../types/Coordinate'
-import { checkCoordinateMatch } from '../../utils/checkCoordinateMatch'
-import styles from './Field.module.css'
+import { Coordinate } from '../../types/Coordinate';
+import { checkCoordinateMatch } from '../../utils/checkCoordinateMatch';
+import styles from './Field.module.css';
 
 export class Field {
-    private target: HTMLElement | null
+    private target: HTMLElement | null;
 
     public constructor(
         private targetSelector: string,
@@ -13,21 +13,23 @@ export class Field {
     ) {
         this.target = document.querySelector<HTMLDivElement>(
             this.targetSelector
-        )
+        );
     }
 
     public render(hitCoordinates: Coordinate[], showShips = false) {
         if (!this.target) {
-            alert('Field not found!')
-            console.error(`Field not found with seletor ${this.targetSelector}`)
-            return
+            alert('Field not found!');
+            console.error(
+                `Field not found with seletor ${this.targetSelector}`
+            );
+            return;
         }
 
         // Clear previous content
-        this.target.innerHTML = ''
+        this.target.innerHTML = '';
 
-        const wrapper = this.createWrapper()
-        this.target.appendChild(wrapper)
+        const wrapper = this.createWrapper();
+        this.target.appendChild(wrapper);
 
         for (let x = 0; x < this.sizeX; x++) {
             for (let y = 0; y < this.sizeY; y++) {
@@ -38,19 +40,19 @@ export class Field {
                         checkCoordinateMatch(hitCoordinates, { x, y }),
                         showShips
                     )
-                )
+                );
             }
         }
     }
 
     private createWrapper(): HTMLElement {
-        const wrapper = document.createElement('div')
-        wrapper.classList.add(styles.wrapper)
+        const wrapper = document.createElement('div');
+        wrapper.classList.add(styles.wrapper);
         wrapper.setAttribute(
             'style',
             `--size-x: ${this.sizeX}; --size-y: ${this.sizeY}`
-        )
-        return wrapper
+        );
+        return wrapper;
     }
 
     private createCell(
@@ -59,14 +61,14 @@ export class Field {
         hit: boolean,
         show: boolean
     ): HTMLElement {
-        const cell = document.createElement('button')
-        cell.classList.add(styles.cell)
-        cell.classList.toggle(styles.hit, hit)
-        cell.classList.toggle(styles.show, show)
+        const cell = document.createElement('button');
+        cell.classList.add(styles.cell);
+        cell.classList.toggle(styles.hit, hit);
+        cell.classList.toggle(styles.show, show);
 
         cell.addEventListener('click', () => {
-            this.onCellClick(x, y)
-        })
-        return cell
+            this.onCellClick(x, y);
+        });
+        return cell;
     }
 }

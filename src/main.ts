@@ -1,4 +1,4 @@
-import { Game } from './controller/Game'
+import { Game } from './controller/Game';
 
 new Game({
     sizeX: 10,
@@ -6,4 +6,4 @@ new Game({
     field: {
         selector: '#field',
     },
-})
+});
