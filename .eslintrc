@@ -1,0 +1,22 @@
+{
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "env": {
+        "browser": true,
+        "jest": true
+    },
+    "root": true,
+    "rules": {
+        "quotes": [2, "single"],
+        "no-console": 0,
+        "no-debugger": 1,
+        "no-undef": 1,
+        "no-var": 2,
+        "semi": [2, "always"],
+        "no-unused-vars": 1,
+        "no-alert": 2,
+        "no-lone-blocks": 0
+    }
+  }
+  
