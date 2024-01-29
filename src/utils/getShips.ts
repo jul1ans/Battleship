@@ -79,8 +79,10 @@ function createShip(
     randomGen: seedrandom.PRNG,
     counter = 0,
 ): Ship {
-    if (counter > 10_000) {
-        throw new Error('Seed creates too many matches');
+    if (counter > 1000) {
+        throw new Error(
+            'Seed creates invalid coordinates. Please try another seed or reload.',
+        );
     }
 
     const horizontal = Math.round(randomGen() * 1) === 0;

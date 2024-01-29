@@ -29,9 +29,20 @@ button {
     font: inherit;
 }
 
+#successMessage,
 #error {
-    background: darkred;
+    position: absolute;
     border: solid 2px black;
     color: white;
     padding: 1rem 2rem;
+}
+
+#successMessage {
+    background: darkgreen;
+    z-index: 100;
+}
+
+#error {
+    background: darkred;
+    z-index: 1000;
 }

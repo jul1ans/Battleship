@@ -1,17 +1,13 @@
 import { Game } from './controller/Game';
+import { printError } from './utils/printError';
 
 try {
     new Game({
         sizeX: 10,
         sizeY: 10,
-        field: {
-            selector: '#field',
-        },
         ships: [4, 4, 5],
+        debug: true,
     });
 } catch (e) {
-    console.error(e);
-    const errorEl = document.querySelector('#error')!;
-    errorEl.innerHTML = (e as Error).message;
-    errorEl.setAttribute('aria-hidden', 'false');
+    printError(e);
 }

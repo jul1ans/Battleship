@@ -1,5 +1,6 @@
 import { Ship } from '../models/Ship';
 import { Coordinate } from '../types/Coordinate';
+import { printError } from '../utils/printError';
 import { generateRandomSeed } from '../utils/generateRandomSeed';
 import { getShips } from '../utils/getShips';
 import { Field } from '../views/Field/Field';
@@ -9,24 +10,26 @@ export class Game {
     private fieldView: Field;
     private ships: Ship[];
     private hits: Coordinate[];
+    private debug: boolean;
 
-    public constructor({
-        field: { selector: fieldSelector },
-        sizeX,
-        sizeY,
-        ships,
-    }: GameConfig) {
+    public constructor({ sizeX, sizeY, ships, debug }: GameConfig) {
         this.ships = [];
         this.hits = [];
         this.fieldView = new Field(
-            fieldSelector,
+            '#field',
             this.onSelectCell.bind(this),
             sizeX,
             sizeY,
         );
+        this.debug = debug;
 
         const randomSeed = generateRandomSeed(10);
-        this.ships.push(...getShips(sizeX, sizeY, ships, randomSeed));
+
+        try {
+            this.ships.push(...getShips(sizeX, sizeY, ships, randomSeed));
+        } catch (e) {
+            printError(e);
+        }
 
         this.render();
     }
@@ -34,7 +37,9 @@ export class Game {
     private render() {
         this.fieldView.render(
             this.hits,
-            this.ships.map((ship) => ship.getCoordinates()).flat(),
+            this.debug
+                ? this.ships.map((ship) => ship.getCoordinates()).flat()
+                : [],
         );
     }
 
@@ -42,6 +47,7 @@ export class Game {
         console.log(`clicked ${x}/${y}`);
         this.shootShips(x, y);
         this.render();
+        this.checkGameEnd();
     }
 
     private shootShips(x: number, y: number) {
@@ -50,5 +56,17 @@ export class Game {
         if (hasHit) {
             this.hits.push({ x, y });
         }
+    }
+
+    private checkGameEnd() {
+        // Game hasn't ended if at least one ship is healthy
+        if (this.ships.some((ship) => ship.checkHealth())) {
+            return;
+        }
+
+        document.querySelector('#field')!.setAttribute('aria-hidden', 'true');
+        document
+            .querySelector('#successMessage')!
+            .setAttribute('aria-hidden', 'false');
     }
 }
