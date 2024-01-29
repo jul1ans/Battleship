@@ -1,5 +1,6 @@
 import { Ship } from '../models/Ship';
 import { Coordinate } from '../types/Coordinate';
+import { generateRandomSeed } from '../utils/generateRandomSeed';
 import { getShips } from '../utils/getShips';
 import { Field } from '../views/Field/Field';
 import { GameConfig } from './types/GameConfig';
@@ -13,6 +14,7 @@ export class Game {
         field: { selector: fieldSelector },
         sizeX,
         sizeY,
+        ships,
     }: GameConfig) {
         this.ships = [];
         this.hits = [];
@@ -20,10 +22,11 @@ export class Game {
             fieldSelector,
             this.onSelectCell.bind(this),
             sizeX,
-            sizeY
+            sizeY,
         );
 
-        this.ships.push(...getShips(sizeX, sizeY, [4, 4, 5], 'test'));
+        const randomSeed = generateRandomSeed(10);
+        this.ships.push(...getShips(sizeX, sizeY, ships, randomSeed));
 
         this.render();
     }
@@ -31,7 +34,7 @@ export class Game {
     private render() {
         this.fieldView.render(
             this.hits,
-            this.ships.map((ship) => ship.getCoordinates()).flat()
+            this.ships.map((ship) => ship.getCoordinates()).flat(),
         );
     }
 

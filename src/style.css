@@ -9,6 +9,7 @@ body {
     align-items: center;
     min-width: 320px;
     min-height: 100vh;
+    font-family: sans-serif;
 }
 
 [aria-hidden='true'] {
@@ -26,4 +27,11 @@ button {
     border: none;
     color: inherit;
     font: inherit;
+}
+
+#error {
+    background: darkred;
+    border: solid 2px black;
+    color: white;
+    padding: 1rem 2rem;
 }

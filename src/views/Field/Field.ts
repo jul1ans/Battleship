@@ -9,21 +9,20 @@ export class Field {
         private targetSelector: string,
         private onCellClick: (x: number, y: number) => void,
         private sizeX = 10,
-        private sizeY = 10
+        private sizeY = 10,
     ) {
         this.target = document.querySelector<HTMLDivElement>(
-            this.targetSelector
+            this.targetSelector,
         );
     }
 
     public render(
         hitCoordinates: Coordinate[],
-        visibleShipCoordinates: Coordinate[] = []
+        visibleShipCoordinates: Coordinate[] = [],
     ) {
         if (!this.target) {
-            alert('Field not found!');
             console.error(
-                `Field not found with seletor ${this.targetSelector}`
+                `Field not found with seletor ${this.targetSelector}`,
             );
             return;
         }
@@ -34,15 +33,15 @@ export class Field {
         const wrapper = this.createWrapper();
         this.target.appendChild(wrapper);
 
-        for (let x = 0; x < this.sizeX; x++) {
-            for (let y = 0; y < this.sizeY; y++) {
+        for (let y = 0; y < this.sizeY; y++) {
+            for (let x = 0; x < this.sizeX; x++) {
                 wrapper.appendChild(
                     this.createCell(
                         x,
                         y,
                         checkCoordinateMatch(hitCoordinates, { x, y }),
-                        checkCoordinateMatch(visibleShipCoordinates, { x, y })
-                    )
+                        checkCoordinateMatch(visibleShipCoordinates, { x, y }),
+                    ),
                 );
             }
         }
@@ -53,7 +52,7 @@ export class Field {
         wrapper.classList.add(styles.wrapper);
         wrapper.setAttribute(
             'style',
-            `--size-x: ${this.sizeX}; --size-y: ${this.sizeY}`
+            `--size-x: ${this.sizeX}; --size-y: ${this.sizeY}`,
         );
         return wrapper;
     }
@@ -62,7 +61,7 @@ export class Field {
         x: number,
         y: number,
         hit: boolean,
-        show: boolean
+        show: boolean,
     ): HTMLElement {
         const cell = document.createElement('button');
         cell.classList.add(styles.cell);

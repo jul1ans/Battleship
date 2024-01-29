@@ -1,6 +1,7 @@
 import seedrandom from 'seedrandom';
 import { Ship } from '../models/Ship';
 import { Coordinate } from '../types/Coordinate';
+import { checkCoordinateMatch } from './checkCoordinateMatch';
 
 /**
  * Return an array with randomly placed ships
@@ -14,14 +15,20 @@ export function getShips(
     maxX: number,
     maxY: number,
     types: number[],
-    seed = 'mySeed'
+    seed = 'mySeed',
 ): Ship[] {
     const ships: Ship[] = [];
     const randomGen = seedrandom(seed);
 
     if (!checkTypesLengthForGridSize(maxX, maxY, types)) {
         throw new Error(
-            `The grid size ${maxX}/${maxY} doesn't match with the types length and sizes. Please reduce the types or increase the grid size!`
+            `The grid size ${maxX}/${maxY} doesn't match with the types length and sizes. Please reduce the types or increase the grid size!`,
+        );
+    }
+
+    if (!checkTypesSizeForGridSize(maxX, maxY, types)) {
+        throw new Error(
+            `The grid size ${maxX}/${maxY} doesn't match with the largest ship size. Please reduce the ship size or increase the grid size!`,
         );
     }
 
@@ -42,11 +49,26 @@ export function getShips(
 function checkTypesLengthForGridSize(
     maxX: number,
     maxY: number,
-    types: number[]
+    types: number[],
 ): boolean {
     // Duplicate the amount of space each ship needs because so you allow extra space between the ships
     const spaceCounter = types.reduce((prev, curr) => prev + curr, 0) * 2;
     return maxX * maxY > spaceCounter;
+}
+
+/**
+ * This function checks if the largest ship will fit in the grid
+ * @param maxX
+ * @param maxY
+ * @param types
+ * @returns Check if the current setup is fine
+ */
+function checkTypesSizeForGridSize(
+    maxX: number,
+    maxY: number,
+    types: number[],
+): boolean {
+    return types.every((type) => type <= maxX && type <= maxY);
 }
 
 function createShip(
@@ -54,8 +76,13 @@ function createShip(
     maxY: number,
     size: number,
     previousShips: Ship[],
-    randomGen: seedrandom.PRNG
+    randomGen: seedrandom.PRNG,
+    counter = 0,
 ): Ship {
+    if (counter > 10_000) {
+        throw new Error('Seed creates too many matches');
+    }
+
     const horizontal = Math.round(randomGen() * 1) === 0;
 
     // Reduce the max values by the size to allow the extra space for the coordinates
@@ -73,7 +100,34 @@ function createShip(
         }
     }
 
-    console.log(coordinates);
+    // Retry create ship when the current coordinates match with a previous ship
+    if (
+        previousShips.some((previousShip) => {
+            return coordinates.some((coordinate) => {
+                return [
+                    coordinate,
+                    { x: coordinate.x + 1, y: coordinate.y },
+                    { x: coordinate.x - 1, y: coordinate.y },
+                    { x: coordinate.x, y: coordinate.y + 1 },
+                    { x: coordinate.x, y: coordinate.y - 1 },
+                ].some((calculatedCoordinate) => {
+                    return checkCoordinateMatch(
+                        previousShip.getCoordinates(),
+                        calculatedCoordinate,
+                    );
+                });
+            });
+        })
+    ) {
+        return createShip(
+            maxX,
+            maxY,
+            size,
+            previousShips,
+            randomGen,
+            counter + 1,
+        );
+    }
 
     return new Ship(coordinates);
 }
