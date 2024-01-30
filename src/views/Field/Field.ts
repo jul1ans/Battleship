@@ -1,3 +1,4 @@
+import { FIELD_SELECTOR } from '../../constants/selectors';
 import { Coordinate } from '../../types/Coordinate';
 import { checkCoordinateMatch } from '../../utils/checkCoordinateMatch';
 import styles from './Field.module.css';
@@ -6,24 +7,20 @@ export class Field {
     private target: HTMLElement | null;
 
     public constructor(
-        private targetSelector: string,
         private onCellClick: (x: number, y: number) => void,
         private sizeX = 10,
         private sizeY = 10,
     ) {
-        this.target = document.querySelector<HTMLDivElement>(
-            this.targetSelector,
-        );
+        this.target = document.querySelector<HTMLDivElement>(FIELD_SELECTOR);
     }
 
     public render(
         hitCoordinates: Coordinate[],
+        missCoordinates: Coordinate[],
         visibleShipCoordinates: Coordinate[] = [],
     ) {
         if (!this.target) {
-            console.error(
-                `Field not found with seletor ${this.targetSelector}`,
-            );
+            console.error(`Field not found with seletor ${FIELD_SELECTOR}`);
             return;
         }
 
@@ -40,6 +37,7 @@ export class Field {
                         x,
                         y,
                         checkCoordinateMatch(hitCoordinates, { x, y }),
+                        checkCoordinateMatch(missCoordinates, { x, y }),
                         checkCoordinateMatch(visibleShipCoordinates, { x, y }),
                     ),
                 );
@@ -61,11 +59,13 @@ export class Field {
         x: number,
         y: number,
         hit: boolean,
+        miss: boolean,
         show: boolean,
     ): HTMLElement {
         const cell = document.createElement('button');
         cell.classList.add(styles.cell);
         cell.classList.toggle(styles.hit, hit);
+        cell.classList.toggle(styles.miss, miss);
         cell.classList.toggle(styles.show, show);
 
         cell.addEventListener('click', () => {

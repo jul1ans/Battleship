@@ -19,7 +19,8 @@
     }
 }
 
-.hit {
+.hit,
+.miss {
     position: relative;
     pointer-events: none;
     display: flex;
@@ -34,6 +35,14 @@
         background: red;
         border-radius: 50%;
     }
+}
+
+.hit:before {
+    background: red;
+}
+
+.miss:before {
+    background: blue;
 }
 
 .show {

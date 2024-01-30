@@ -5,23 +5,30 @@ import { generateRandomSeed } from '../utils/generateRandomSeed';
 import { getShips } from '../utils/getShips';
 import { Field } from '../views/Field/Field';
 import { GameConfig } from './types/GameConfig';
+import { SuccessMessage } from '../views/SuccessMessage/SuccessMessage';
+import { ControlPanel } from '../views/ControlPanel/ControlPanel';
 
 export class Game {
-    private fieldView: Field;
-    private ships: Ship[];
-    private hits: Coordinate[];
-    private debug: boolean;
+    private fieldView?: Field;
+    private controlPanel?: ControlPanel;
+    private ships: Ship[] = [];
+    private hits: Coordinate[] = [];
+    private misses: Coordinate[] = [];
+    private gameConfig: GameConfig;
 
-    public constructor({ sizeX, sizeY, ships, debug }: GameConfig) {
+    public constructor(gameConfig: GameConfig) {
+        this.gameConfig = gameConfig;
+        this.init();
+    }
+
+    private init() {
+        const { sizeX, sizeY, ships } = this.gameConfig;
+
         this.ships = [];
         this.hits = [];
-        this.fieldView = new Field(
-            '#field',
-            this.onSelectCell.bind(this),
-            sizeX,
-            sizeY,
-        );
-        this.debug = debug;
+        this.misses = [];
+        this.fieldView = new Field(this.onSelectCell.bind(this), sizeX, sizeY);
+        this.controlPanel = new ControlPanel();
 
         const randomSeed = generateRandomSeed(10);
 
@@ -35,12 +42,15 @@ export class Game {
     }
 
     private render() {
-        this.fieldView.render(
+        this.fieldView?.render(
             this.hits,
-            this.debug
+            this.misses,
+            this.gameConfig.debug
                 ? this.ships.map((ship) => ship.getCoordinates()).flat()
                 : [],
         );
+
+        this.controlPanel?.setCounter(this.getTotalAmountShots());
     }
 
     private onSelectCell(x: number, y: number) {
@@ -51,11 +61,18 @@ export class Game {
     }
 
     private shootShips(x: number, y: number) {
-        const hasHit = this.ships.some((ship) => ship.checkHit({ x, y }));
+        const coordinate = { x, y };
+        const hasHit = this.ships.some((ship) => ship.checkHit(coordinate));
 
         if (hasHit) {
-            this.hits.push({ x, y });
+            this.hits.push(coordinate);
+        } else {
+            this.misses.push(coordinate);
         }
+    }
+
+    private getTotalAmountShots(): number {
+        return this.hits.length + this.misses.length;
     }
 
     private checkGameEnd() {
@@ -64,9 +81,11 @@ export class Game {
             return;
         }
 
-        document.querySelector('#field')!.setAttribute('aria-hidden', 'true');
-        document
-            .querySelector('#successMessage')!
-            .setAttribute('aria-hidden', 'false');
+        const successMessage = new SuccessMessage(() => {
+            this.init();
+            successMessage.hideSuccess();
+        });
+
+        successMessage.showSuccess();
     }
 }

@@ -1,0 +1,9 @@
+.button {
+    border: solid 2px currentColor;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.button:hover {
+    background: #444;
+}

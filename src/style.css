@@ -12,6 +12,11 @@ body {
     font-family: sans-serif;
 }
 
+p {
+    margin: 0 0 1rem;
+    padding: 0;
+}
+
 [aria-hidden='true'] {
     display: none;
 }
@@ -35,6 +40,7 @@ button {
     border: solid 2px black;
     color: white;
     padding: 1rem 2rem;
+    text-align: center;
 }
 
 #successMessage {
