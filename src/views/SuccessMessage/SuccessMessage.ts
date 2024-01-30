@@ -6,7 +6,7 @@ export class SuccessMessage {
     private field: HTMLDivElement | null;
     private button: HTMLButtonElement;
 
-    public constructor(onButtonClick: () => void) {
+    public constructor(onButtonClick: () => void, counter: number) {
         this.target = document.querySelector(SUCCESS_SELECTOR);
         this.field = document.querySelector(FIELD_SELECTOR);
         this.button = document.createElement('button');
@@ -15,8 +15,7 @@ export class SuccessMessage {
             return;
         }
 
-        this.target.innerHTML =
-            '<p>Congratulations, you have hit all ships!</p>';
+        this.target.innerHTML = `<p>Congratulations, you have hit all ships with a total amount of ${counter} shots!</p>`;
         this.button.setAttribute('type', 'button');
         this.button.classList.add(styles.button);
         this.button.innerText = 'retry';

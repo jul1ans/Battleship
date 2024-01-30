@@ -15,12 +15,13 @@ export class ControlPanel {
 
         const wrapperEl = document.createElement('div');
         wrapperEl.classList.add(styles.wrapper);
-        wrapperEl.innerText = 'Counter: ';
+        wrapperEl.innerHTML = 'Counter:&nbsp;';
         panelEl.appendChild(wrapperEl);
 
         this.counter = document.createElement('span');
+        this.counter.classList.add(styles.counter);
         this.counter.innerText = '0';
-        panelEl.appendChild(this.counter);
+        wrapperEl.appendChild(this.counter);
     }
 
     public setCounter(count: number) {

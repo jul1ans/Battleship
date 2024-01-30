@@ -24,14 +24,10 @@ describe('getShips', () => {
 
         const ship2Coordinate = ships[1].getCoordinates()[0];
 
-        console.log(ships[0].getCoordinates(), ships[1].getCoordinates());
-
         expect(
             ships[0].getCoordinates().every((coordinate) => {
                 const distanceX = Math.abs(ship2Coordinate.x - coordinate.x);
                 const distanceY = Math.abs(ship2Coordinate.y - coordinate.y);
-
-                console.log(distanceX, distanceY);
                 return distanceX > 1 || distanceY > 1;
             }),
         ).toBeTruthy();

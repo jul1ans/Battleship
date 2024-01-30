@@ -5,9 +5,8 @@ try {
     new Game({
         sizeX: 10,
         sizeY: 10,
-        // ships: [4, 4, 5],
-        ships: [2],
-        debug: true,
+        ships: [4, 4, 5],
+        debug: false,
     });
 } catch (e) {
     printError(e);

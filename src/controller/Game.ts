@@ -4,7 +4,7 @@ import { printError } from '../utils/printError';
 import { generateRandomSeed } from '../utils/generateRandomSeed';
 import { getShips } from '../utils/getShips';
 import { Field } from '../views/Field/Field';
-import { GameConfig } from './types/GameConfig';
+import { GameConfig } from '../types/GameConfig';
 import { SuccessMessage } from '../views/SuccessMessage/SuccessMessage';
 import { ControlPanel } from '../views/ControlPanel/ControlPanel';
 
@@ -31,6 +31,7 @@ export class Game {
         this.controlPanel = new ControlPanel();
 
         const randomSeed = generateRandomSeed(10);
+        console.log(`Init game with seed: ${randomSeed}`);
 
         try {
             this.ships.push(...getShips(sizeX, sizeY, ships, randomSeed));
@@ -54,7 +55,6 @@ export class Game {
     }
 
     private onSelectCell(x: number, y: number) {
-        console.log(`clicked ${x}/${y}`);
         this.shootShips(x, y);
         this.render();
         this.checkGameEnd();
@@ -84,7 +84,7 @@ export class Game {
         const successMessage = new SuccessMessage(() => {
             this.init();
             successMessage.hideSuccess();
-        });
+        }, this.getTotalAmountShots());
 
         successMessage.showSuccess();
     }
