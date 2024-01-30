@@ -1,5 +1,5 @@
 import { CONTROL_PANEL_SELECTOR } from '../../constants/selectors';
-import styles from './ControlPanel.module.scss';
+import styles from './ControlPanel.module.css';
 
 export class ControlPanel {
     private counter?: HTMLElement;

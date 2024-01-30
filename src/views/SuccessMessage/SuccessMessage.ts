@@ -1,5 +1,5 @@
 import { FIELD_SELECTOR, SUCCESS_SELECTOR } from '../../constants/selectors';
-import styles from './SuccessMessage.module.scss';
+import styles from './SuccessMessage.module.css';
 
 export class SuccessMessage {
     private target: HTMLDivElement | null;
