@@ -12,10 +12,14 @@
     height: 2rem;
     border-right: var(--border);
     border-top: var(--border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
 
     &:hover,
     &:focus-visible {
-        background: gray;
+        background: lightgray;
     }
 }
 
@@ -30,6 +34,7 @@
     &:before {
         content: '';
         display: block;
+        position: absolute;
         width: 90%;
         height: 90%;
         background: red;

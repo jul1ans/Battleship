@@ -67,6 +67,7 @@ export class Field {
         cell.classList.toggle(styles.hit, hit);
         cell.classList.toggle(styles.miss, miss);
         cell.classList.toggle(styles.show, show);
+        cell.innerText = `${String.fromCharCode(65 + x)}${y + 1}`;
 
         cell.addEventListener('click', () => {
             this.onCellClick(x, y);

@@ -8,6 +8,7 @@
         "build": "tsc && vite build",
         "preview": "vite preview",
         "test": "jest",
+        "test:coverage": "jest --coverage=true --coverageDirectory=coverage",
         "lint": "eslint \"./**/*.{js,ts,tsx}\"",
         "lint:fix": "prettier . --write && npm run lint --fix"
     },

@@ -1,10 +1,10 @@
-import { Ship } from '../models/Ship';
-import { Coordinate } from '../types/Coordinate';
+import type { Ship } from '../models/Ship';
+import type { Coordinate } from '../types/Coordinate';
+import type { GameConfig } from '../types/GameConfig';
 import { printError } from '../utils/printError';
 import { generateRandomSeed } from '../utils/generateRandomSeed';
 import { getShips } from '../utils/getShips';
 import { Field } from '../views/Field/Field';
-import { GameConfig } from '../types/GameConfig';
 import { SuccessMessage } from '../views/SuccessMessage/SuccessMessage';
 import { ControlPanel } from '../views/ControlPanel/ControlPanel';
 
