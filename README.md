@@ -16,6 +16,11 @@ The game will be available on localhost:
 Run unit and integration tests
 `npm run test`
 
+## Debug mode
+
+Inside [main.ts](src/main.ts) you can set the config "debug" to true.
+This allows you to see the ships for testing purpose.
+
 ## Architecture
 
 This implementation is based on a simple MVC architecture pattern.
