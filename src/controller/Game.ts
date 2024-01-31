@@ -31,7 +31,7 @@ export class Game {
         this.controlPanel = new ControlPanel();
 
         const randomSeed = generateRandomSeed(10);
-        
+
         console.log(`Init game with seed: ${randomSeed}`);
 
         try {
