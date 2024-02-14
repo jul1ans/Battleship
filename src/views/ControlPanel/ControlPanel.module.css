@@ -1,11 +1,11 @@
 .wrapper {
-    display: flex;
-    margin-bottom: 1rem;
+  display: flex;
+  margin-bottom: 1rem;
 }
 
 .counter {
-    display: inline-block;
-    width: 3ch;
-    border-bottom: solid 2px black;
-    text-align: center;
+  display: inline-block;
+  width: 3ch;
+  border-bottom: solid 2px black;
+  text-align: center;
 }

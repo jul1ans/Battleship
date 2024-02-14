@@ -1,55 +1,55 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    min-width: 320px;
-    min-height: 100vh;
-    font-family: sans-serif;
+  margin: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: sans-serif;
 }
 
 p {
-    margin: 0 0 1rem;
-    padding: 0;
+  margin: 0 0 1rem;
+  padding: 0;
 }
 
 [aria-hidden='true'] {
-    display: none;
+  display: none;
 }
 
 button {
-    -webkit-appearance: none;
-    border-radius: 0;
-    text-align: inherit;
-    background: none;
-    box-shadow: none;
-    padding: 0;
-    cursor: pointer;
-    border: none;
-    color: inherit;
-    font: inherit;
+  -webkit-appearance: none;
+  border-radius: 0;
+  text-align: inherit;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  color: inherit;
+  font: inherit;
 }
 
 #successMessage,
 #error {
-    position: absolute;
-    border: solid 2px black;
-    color: white;
-    padding: 1rem 2rem;
-    text-align: center;
+  position: absolute;
+  border: solid 2px black;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
 }
 
 #successMessage {
-    background: darkgreen;
-    z-index: 100;
+  background: darkgreen;
+  z-index: 100;
 }
 
 #error {
-    background: darkred;
-    z-index: 1000;
+  background: darkred;
+  z-index: 1000;
 }

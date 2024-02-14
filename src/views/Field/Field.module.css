@@ -1,55 +1,55 @@
 .wrapper {
-    --border: solid 1px black;
+  --border: solid 1px black;
 
-    display: grid;
-    grid-template-columns: repeat(var(--size-x), 1fr);
-    border-left: var(--border);
-    border-bottom: var(--border);
+  display: grid;
+  grid-template-columns: repeat(var(--size-x), 1fr);
+  border-left: var(--border);
+  border-bottom: var(--border);
 }
 
 .cell {
-    width: 2rem;
-    height: 2rem;
-    border-right: var(--border);
-    border-top: var(--border);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border-right: var(--border);
+  border-top: var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
 
-    &:hover,
-    &:focus-visible {
-        background: lightgray;
-    }
+  &:hover,
+  &:focus-visible {
+    background: lightgray;
+  }
 }
 
 .hit,
 .miss {
-    position: relative;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 90%;
-        height: 90%;
-        background: red;
-        border-radius: 50%;
-    }
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background: red;
+    border-radius: 50%;
+  }
 }
 
 .hit:before {
-    background: red;
+  background: red;
 }
 
 .miss:before {
-    background: blue;
+  background: blue;
 }
 
 .show {
-    background: lightblue;
+  background: lightblue;
 }

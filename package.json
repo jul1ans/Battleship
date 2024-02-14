@@ -1,33 +1,33 @@
 {
-    "name": "Battleship",
-    "private": true,
-    "version": "0.0.1",
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "tsc && vite build",
-        "preview": "vite preview",
-        "test": "jest",
-        "test:coverage": "jest --coverage=true --coverageDirectory=coverage",
-        "lint": "eslint \"./**/*.{js,ts,tsx}\"",
-        "lint:fix": "prettier . --write && npm run lint --fix"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.23.9",
-        "@babel/preset-env": "^7.23.9",
-        "@babel/preset-typescript": "^7.23.3",
-        "@types/jest": "^29.5.11",
-        "@types/seedrandom": "^3.0.8",
-        "@typescript-eslint/eslint-plugin": "^6.20.0",
-        "@typescript-eslint/parser": "^6.20.0",
-        "babel-jest": "^29.7.0",
-        "eslint": "^8.56.0",
-        "jest": "^29.7.0",
-        "prettier": "^3.2.4",
-        "typescript": "^5.2.2",
-        "vite": "^5.0.8"
-    },
-    "dependencies": {
-        "seedrandom": "^3.0.5"
-    }
+  "name": "Battleship",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "jest",
+    "test:coverage": "jest --coverage=true --coverageDirectory=coverage",
+    "lint": "eslint \"./**/*.{js,ts,tsx}\"",
+    "lint:fix": "prettier . --write && npm run lint --fix"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-typescript": "^7.23.3",
+    "@types/jest": "^29.5.11",
+    "@types/seedrandom": "^3.0.8",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "babel-jest": "^29.7.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  },
+  "dependencies": {
+    "seedrandom": "^3.0.5"
+  }
 }
